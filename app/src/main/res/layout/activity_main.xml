@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textshowr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:gravity="center"
+                android:fontFamily="cursive"
+                android:textSize="35dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        >
+
+        <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="your neam"
+        android:gravity="center"/>
+        <EditText
+        android:id="@+id/userpass"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="pass"
+        android:gravity="center"/>
+        <EditText
+            android:id="@+id/userpass2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="wieder pass"
+            android:gravity="center"/>
+        <EditText
+            android:id="@+id/usernamebus"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="busniss"
+            android:gravity="center"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rgstieren"
+
+            android:onClick="registieren"/>
+
+
+
+    </LinearLayout>
+
+        </LinearLayout>
+
+
+</RelativeLayout>
