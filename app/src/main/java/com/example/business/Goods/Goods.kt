@@ -12,6 +12,10 @@ class Goods {
         this.payPreis = payPreis
 
     }
+    fun getwarenname():String{
+        return warname!!
+    }
+
 
 
 
