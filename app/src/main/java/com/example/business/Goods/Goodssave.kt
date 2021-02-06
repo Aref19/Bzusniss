@@ -21,5 +21,17 @@ class Goodssave {
     fun getCount():String{
         return count!!
     }
+     constructor(){
 
+     }
+
+    fun setwarname(name:String?){
+        this.warname=name
+    }
+    fun setprice(price:String){
+        this.preic=preic
+    }
+    fun setacount(acount:String){
+        this.count=acount
+    }
 }
