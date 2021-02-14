@@ -1,3 +1,4 @@
+
 package com.example.business.Goods
 
 class Goods {
@@ -12,6 +13,10 @@ class Goods {
         this.payPreis = payPreis
 
     }
+    fun getwarenname():String{
+        return warname!!
+    }
+
 
 
 
