@@ -115,7 +115,7 @@ class SaveGoods : AppCompatActivity() {
         for (good in goods) {
             dp.insertAll(
                 SaveGoodsDB.Goodssache(
-                    0,
+
                     good.getwarenname(),
                     good.getPreic(),
                     good.getCount()

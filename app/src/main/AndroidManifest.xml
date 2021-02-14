@@ -9,7 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainFunctions.Kasse"></activity>
+        <activity android:name=".Sale.Wins"></activity>
+        <activity
+            android:name=".MainFunctions.DrawActivity"
+            android:label="@string/title_activity_draw"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".MainFunctions.Draw"
+            android:label="@string/title_activity_draw"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".MainFunctions.Kasse"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Start.Start" />
         <activity android:name=".MainActivity" />
         <activity android:name=".Goods.SaveGoods" />

@@ -16,6 +16,8 @@ interface GoodsInterface {
     fun updateitem(countnew:String,name:String)
     @Query("select * from goods where name=  :name")
     fun selectitem(name : String):SaveGoodsDB.Goodssache
+    @Query("update goods set  count =  :countnew, name = :name1, pice= :price where name = :nameurs ")
+    fun updatecomp(countnew:String,name1:String,price:String,nameurs:String)
 
 
 }
