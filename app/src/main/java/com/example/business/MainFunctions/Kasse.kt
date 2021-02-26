@@ -10,14 +10,16 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.business.Adpters.AdpterRow
 import com.example.business.DatenBank.AppDataBase
 import com.example.business.DatenBank.SaveGoodsDB
+import com.example.business.Goods.GoodsCatch
 import com.example.business.Goods.Goodssave
+import com.example.business.Goods.Mvp
 import com.example.business.Goods.RechnerKlass
 import com.example.business.R
 import com.example.business.Sale.Wins
 import com.example.business.SaveShared.SaveShard
 
-class Kasse : AppCompatActivity(), saleInterface {
-    var list = mutableListOf<Goodssave>()
+class Kasse : AppCompatActivity(), saleInterface,GoodsCatch {
+    var listgoodssave = mutableListOf<Goodssave>()
     var lsiview: ListView? = null
     var nameg: TextView? = null
     var namekaufgoodk: EditText? = null
@@ -29,6 +31,7 @@ class Kasse : AppCompatActivity(), saleInterface {
     var tooL: androidx.appcompat.widget.Toolbar? = null
     var win: ImageButton? = null
     var dabte: ImageButton? = null
+    var goodsCatch:Mvp?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +47,7 @@ class Kasse : AppCompatActivity(), saleInterface {
         countk = findViewById(R.id.countofcodk)
         win = findViewById(R.id.wins)
         dabte = findViewById(R.id.Debt)
+        goodsCatch= Mvp(this,namekaufgoodk!!,pricegoodskaufk!!,countkaufk!!,namegoodk!!,this,countk!!)
         var inte: Intent
         win!!.setOnClickListener(View.OnClickListener {
             inte = Intent(application, Wins::class.java)
@@ -56,57 +60,13 @@ class Kasse : AppCompatActivity(), saleInterface {
 
         })
 
-        fuultable(this)
+        goodsCatch!!.fullTable()
         listview()
     }
 
-    private fun fuultable(con: Context) {
-        list.clear()
-        var listofgoods = AppDataBase.getDateBase(con).goodssachDao().getAll()
-        for (good in listofgoods) {
-            Log.i("fromdata", "saveDateinDatenBank: " + listofgoods.get(0).count)
-            list.add(Goodssave(good.name, good.count, good.pice))
-        }
-        var adp = AdpterRow(list, this)
-        lsiview!!.adapter = adp
-
-    }
 
     fun addNew(view: View) {
-        addNewElemnet()
-
-
-    }
-
-    fun addNewElemnet() {
-
-        if (!namekaufgoodk!!.text.toString().equals("") && !pricegoodskaufk!!.text.toString()
-                .equals("") && !countkaufk!!.text.toString().equals("")
-        ) {
-
-            var dp = AppDataBase.getDateBase(this).goodssachDao()
-
-            try {
-                dp.insertAll(
-                    SaveGoodsDB.Goodssache(
-                        namekaufgoodk!!.text.toString(),
-                        pricegoodskaufk!!.text.toString(),
-                        countkaufk!!.text.toString()
-                    )
-                )
-            } catch (e: Exception) {
-                Toast.makeText(this, "you have a same Prodkt", Toast.LENGTH_LONG).show()
-            }
-
-
-
-            list.clear()
-            fuultable(this)
-            namekaufgoodk!!.setText("")
-            pricegoodskaufk!!.setText("")
-            countkaufk!!.setText("")
-        } else
-            Toast.makeText(this, "plase check your insert", Toast.LENGTH_LONG).show()
+      addElement()
     }
 
     fun updatecount() {
@@ -123,58 +83,14 @@ class Kasse : AppCompatActivity(), saleInterface {
                 RechnerKlass.newCount(item.count, countk!!.text.toString()),
                 namegoodk!!.text.toString()
             )
-        list.clear()
-        namegoodk!!.setText("")
-        pricegoodsk!!.setText("")
-        countk!!.setText("")
-        fuultable(this)
-        //   }
-
 
     }
 
-    fun update(view: View) {
-        if (listConten(namegoodk!!)) {
-            var dp = AppDataBase.getDateBase(this).goodssachDao()
-            var item = dp.selectitem(namegoodk!!.text.toString())
-            if (pricegoodsk!!.text.toString().toInt() > item.pice.toString().toInt()) {
-                updatecount()
-            } else
-                RechnerKlass.priceColluction(
-                    item.pice, pricegoodsk!!.text.toString(), this,
-                    namegoodk!!, countk!!, pricegoodsk!!
-                )
-        } else
-            Toast.makeText(this, "you dont have such goods", Toast.LENGTH_LONG).show()
 
-    }
-
-    fun userbescheid(t: Boolean, con: Context, e: EditText, e1: EditText, e2: EditText) {
-        var dp = AppDataBase.getDateBase(con).goodssachDao()
-        var item = dp.selectitem(e!!.text.toString())
-        Log.i("counter", "udatecount: " + item.name)
-        if (t) {
-            if (RechnerKlass.newCount(item.count, e1!!.text.toString()).toInt() == 0) {
-                dp.delete(item)
-            } else if (RechnerKlass.newCount(item.count, e1!!.text.toString()).toInt() < 0) {
-                Toast.makeText(this, "you dont have so much ", Toast.LENGTH_LONG).show()
-            } else
-                dp.updateitem(
-                    RechnerKlass.newCount(item.count, e1!!.text.toString()),
-                    e!!.text.toString()
-                )
-            list.clear()
-            e!!.setText("")
-            e2!!.setText("")
-            e1!!.setText("")
-
-        } else
-            Toast.makeText(con, "its rejected", Toast.LENGTH_LONG).show()
-    }
 
     fun listConten(e: EditText): Boolean {
         var status: Boolean = false
-        for (good in list) {
+        for (good in listgoodssave) {
             if (good.getwarenname().equals(e.text.toString())) {
                 status = true
             }
@@ -183,7 +99,7 @@ class Kasse : AppCompatActivity(), saleInterface {
     }
 
     fun refreach(view: View) {
-        fuultable(this)
+        goodsCatch!!.fullTable()
     }
 
     fun listview() {
@@ -197,6 +113,39 @@ class Kasse : AppCompatActivity(), saleInterface {
             myuppop.show(fragmentManager, null)
             Log.i("Yallah", "listview: " + dp.selectitem(text1.text.toString()))
         }
+    }
+
+
+
+
+
+    override fun fullTable(list: List<SaveGoodsDB.Goodssache>){listgoodssave.clear()
+        for (good in list) {
+            Log.i("fromdata", "saveDateinDatenBank: " + list.get(0).count)
+            listgoodssave.add(Goodssave(good.name, good.count, good.pice))
+        }
+        var adp = AdpterRow(listgoodssave, this)
+        lsiview!!.adapter = adp
+    }
+
+    override fun addElement() {
+        goodsCatch!!.addElement(SaveGoodsDB.Goodssache(namekaufgoodk!!.text.toString(), pricegoodskaufk!!.text.toString()
+            ,countkaufk!!.text.toString()))
+    }
+
+    override fun selaItem() {
+        listgoodssave.clear()
+        namegoodk!!.setText("")
+        pricegoodsk!!.setText("")
+        countk!!.setText("")
+    }
+
+    fun update(view: View) {
+        if(!namegoodk!!.text.equals("")&&!!pricegoodsk!!.text.equals("")&&!countk!!.text.equals(""))
+            goodsCatch!!.deleteItem(pricegoodsk!!)
+
+
+
     }
 
 
