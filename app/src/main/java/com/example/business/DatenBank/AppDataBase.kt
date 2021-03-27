@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = arrayOf(SaveGoodsDB.Goodssache::class), version = 1)
+@Database(entities = arrayOf(SaveGoodsDB.Goodssache::class,SaveGoodsDB.SaledGoods::class), version = 2)
 abstract class AppDataBase : RoomDatabase() {
     abstract fun goodssachDao(): GoodsInterface
 

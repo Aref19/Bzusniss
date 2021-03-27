@@ -42,9 +42,10 @@
             <EditText
                 android:id="@+id/countofcods"
                 android:layout_width="wrap_content"
+
                 android:layout_height="wrap_content"
                 android:hint="Count"
-                android:inputType="number" />
+                android:inputType="numberDecimal" />
 
             <ImageButton
                 android:layout_width="wrap_content"
