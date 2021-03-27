@@ -20,7 +20,7 @@ class SaveGoodsDB {
     @Entity(tableName = "saledGoods")
     class SaledGoods(
         @PrimaryKey(autoGenerate = false)
-        var date:Date,
+        var date:String,
         var name: String?,
         var pice: String,
         var count:String

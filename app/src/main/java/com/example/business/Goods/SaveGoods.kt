@@ -19,7 +19,7 @@ import com.example.business.R
 import com.example.business.SaveShared.SaveShard
 import kotlinx.android.synthetic.main.activity_save_goods.*
 
-class SaveGoods : AppCompatActivity() {
+open class SaveGoods : AppCompatActivity() {
     var table: TableLayout? = null
     var nameBusniss: TextView? = null
     var waren: ListView? = null

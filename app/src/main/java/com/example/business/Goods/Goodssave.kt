@@ -1,6 +1,6 @@
 package com.example.business.Goods
 
-class Goodssave {
+open class Goodssave {
     private var warname:String?=null
     private var preic:String?=null
     private var count:String?=null
