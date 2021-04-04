@@ -1,5 +1,7 @@
 package com.example.business.DatenBank
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 
 @Dao
@@ -21,6 +23,9 @@ interface GoodsInterface {
 
     @Insert
     fun insertinSaled(goodssache: SaveGoodsDB.SaledGoods)
+    @Query("select * From saledGoods")
+    fun getAllSaled(): List<SaveGoodsDB.SaledGoods>
+
 /*   @Delete
     fun deletefromsaled(goodssache: SaveGoodsDB.SaledGoods)
     @Query("select * from goods where name=  :name")

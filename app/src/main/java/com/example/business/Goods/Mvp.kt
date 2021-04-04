@@ -116,12 +116,12 @@ class Mvp  :saleInterface{
                 name!!
             )
             var data=Calendar.getInstance()
-            var datum:String=""+data.get(Calendar.DAY_OF_MONTH)+"/"+data.get(Calendar.MONTH)+"/"+data.get(Calendar.YEAR)
+            var datum:String=""+data.get(Calendar.DAY_OF_MONTH)+"/"+data.get(Calendar.MONTH)+"/"+data.get(Calendar.YEAR)+"||\""+
+                    +data.get(Calendar.SECOND)+"/"+data.get(Calendar.MINUTE)+"/"+data.get(Calendar.HOUR)
             Log.i("datum", "checkProces: "+datum)
-            var saledsGoods=SaledsGoods(name,count,price)
-             saledsGoods.setdata(datum)
+            var saledsGoods= SaveGoodsDB.SaledGoods(datum,name,  price,count)
             Log.i("datum", "checkProces: "+datum)
-        //    getInstanceFromDataBane(c).insertinSaled()
+           getInstanceFromDataBane(c).insertinSaled(saledsGoods)
 
 
             return true
